@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understand💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* =========================
+   SHARED PINK BACKGROUND
+========================= */
+
+.page {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.8), transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(255,182,210,.5), transparent 30%),
+        linear-gradient(135deg, #ffd6e7, #fff0f6, #f8c8dc);
+}
+
+/* =========================
+   FLOWERS
+========================= */
+
+.flower {
+    position: absolute;
+    font-size: 55px;
+    opacity: .65;
+    animation: float 6s ease-in-out infinite;
+    user-select: none;
+    pointer-events: none;
+}
+
+.f1 { top: 5%; left: 7%; }
+.f2 { top: 15%; right: 8%; font-size: 70px; animation-delay: 1s; }
+.f3 { bottom: 8%; left: 9%; font-size: 65px; animation-delay: 2s; }
+.f4 { bottom: 12%; right: 7%; animation-delay: 3s; }
+.f5 { top: 45%; left: 2%; font-size: 42px; animation-delay: 1.5s; }
+.f6 { top: 48%; right: 2%; font-size: 45px; animation-delay: 2.5s; }
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(5deg);
+    }
+}
+
+/* =========================
+   PAGE 1
+========================= */
+
+#page1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Falling petals ONLY on page 1 */
+
+.petal {
+    position: absolute;
+    top: -30px;
+    color: #ff8fb5;
+    font-size: 20px;
+    animation: fall linear infinite;
+    opacity: .7;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+.card {
+    width: min(90%, 520px);
+    padding: 48px 35px;
+    text-align: center;
+
+    background: rgba(255,255,255,.72);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 35px;
+
+    box-shadow:
+        0 20px 60px rgba(184, 74, 115, .2),
+        inset 0 0 30px rgba(255,255,255,.5);
+
+    position: relative;
+    z-index: 5;
+
+    animation: appear 1.2s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.small {
+    font-size: 15px;
+    color: #b55b7d;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    margin: 0;
+    color: #a83e68;
+    font-size: clamp(38px, 8vw, 58px);
+    font-family: Georgia, serif;
+    font-weight: 500;
+}
+
+.heart {
+    display: inline-block;
+    animation: heartbeat 1.4s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.18);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+}
+
+.message {
+    margin: 25px auto;
+    color: #754459;
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 400px;
+}
+
+.please {
+    color: #c34d79;
+    font-size: 23px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 28px;
+}
+
+button {
+    border: none;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: .3s ease;
+    font-weight: 600;
+}
+
+#yes {
+    background: linear-gradient(135deg, #e96b9b, #c94376);
+    color: white;
+    box-shadow: 0 8px 20px rgba(201,67,118,.3);
+}
+
+#yes:hover {
+    transform: scale(1.08);
+}
+
+#no {
+    background: white;
+    color: #b75a7b;
+    border: 1px solid #f0bfd1;
+}
+
+#no:hover {
+    transform: translateX(20px);
+}
+
+#result {
+    display: none;
+    margin-top: 25px;
+    color: #b53e70;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* =========================
+   PAGE 2
+========================= */
+
+#page2 {
+    display: none;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding: 60px 20px;
+}
+
+/* Clean content box */
+
+.text-card {
+    width: min(90%, 700px);
+    margin: auto;
+
+    padding: 55px 45px;
+
+    background: rgba(255,255,255,.68);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,.85);
+    border-radius: 35px;
+
+    box-shadow:
+        0 20px 60px rgba(184, 74, 115, .18),
+        inset 0 0 30px rgba(255,255,255,.45);
+
+    position: relative;
+    z-index: 5;
+
+    animation: page2appear 1s ease;
+}
+
+@keyframes page2appear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page2-title {
+    text-align: center;
+    color: #a83e68;
+    font-family: Georgia, serif;
+    font-size: clamp(32px, 7vw, 48px);
+    font-weight: 500;
+    margin: 0 0 35px;
+}
+
+.user-text {
+    color: #754459;
+    font-size: 18px;
+    line-height: 1.9;
+    text-align: center;
+}
+
+/* =========================
+   HEART CONFETTI
+========================= */
+
+.confetti {
+    position: fixed;
+    bottom: -30px;
+    font-size: 22px;
+    z-index: 50;
+    pointer-events: none;
+    animation: confettiUp 3s ease-out forwards;
+}
+
+@keyframes confettiUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .card {
+        padding: 40px 22px;
+    }
+
+    .text-card {
+        padding: 40px 25px;
+    }
+
+    .message {
+        font-size: 16px;
+    }
+
+    .user-text {
+        font-size: 17px;
+    }
+
+    .flower {
+        font-size: 42px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     PAGE 1
+===================================================== -->
+
+<section id="page1" class="page">
+
+    <!-- Flowers -->
+    <div class="flower f1">🌸</div>
+    <div class="flower f2">🌷</div>
+    <div class="flower f3">🌺</div>
+    <div class="flower f4">🌸</div>
+    <div class="flower f5">🌼</div>
+    <div class="flower f6">🌷</div>
+
+    <!-- Main Card -->
+    <div class="card">
+
+        <div class="small">
+            A SINCERE IMPORTANT REQUEST
+        </div>
+
+       
+        <div class="message">
+           I know i've kept saying about this, but this time, i've said all my requests at once..
+
+            <br><br>
+
+            
+        </div>
+
+        <div class="please">
+          Kindly read all the words plij
+        </div>
+
+        <div class="buttons">
+
+            <button id="yes" onclick="yesClicked()">
+                Okayyy 💗
+            </button>
+
+            <button id="no" onclick="noClicked()">
+                No 😭
+            </button>
+
+        </div>
+
+        <div id="result">
+           
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 2
+===================================================== -->
+
+<section id="page2" class="page">
+
+    <!-- Same flowers, but NO falling petals -->
+
+    <div class="flower f1">🌸</div>
+    <div class="flower f2">🌷</div>
+    <div class="flower f3">🌺</div>
+    <div class="flower f4">🌸</div>
+    <div class="flower f5">🌼</div>
+    <div class="flower f6">🌷</div>
+
+    <div class="text-card">
+
+        <h2 class="page2-title">
+            Okay... hear me out 🌷
+        </h2>
+
+        <div class="user-text">
+
+            <!--
+            PUT YOUR TEXT HERE
+
+            You can write as much as you want.
+            Add <br><br> between paragraphs.
+
+            Example:
+
+            I really wanted to ask you something...
+
+            <br><br>
+
+            And I know you might say no,
+            but please hear me out first. 🥺
+
+            -->
+
+            piku en gotha..other guys will make you as their bsfs in their pov, nang adu kuda ishta illa, but adur bagge amel heltini..
+<br><br>
+First, wt you make them in ur pov, that matters..ninu avrna nin pov alli bsfs agi madkondre, i genuinely won't like it piku. nin pov alli avrna bsfs agi madkondila andru kuda, bsfs tara behave and treat madudrunu, it considers as bsfs only, piku ma..
+<br><br>
+so now as i said, other guys will make you as their bsfs in their pov, adu kuda nang ishta illa, like if you behave with them 'little' childish or 'too' friendly, then only they treat and make you as their bsfs... What they treat and make you in their pov, that depends completely on you piku ma.. ninu bsfs tara ne behave madudre, then they will treat and make you as their bsfs itself... nang adh genuinely ishta illa piku baby...
+<br><br>
+Am saying this cuz i'm already seeing that they already started treating you and made you as their bsfs itself within 2 months of meet itselfff..... nange example yala kelbeda, you too know now wt you guys being is like being as bsfs...
+<br><br>
+You said na, am imp to you, others alla and nan heludre u wont even talk with them in this 3 years too antha👉🏻👈🏻, i won't say don't talk with them at all, cuz ik as you said, this 3 years will be difficult, as you don't have much female friends na... talk with the guys, just by talking and being 'justtt' friendly won't be an issue, but just don't treat or behave with them as bsfs, pl piku...
+nan goskara pl set this boundary whichever i said till now piku ma...
+i just don't like MY girl to be close with other guys👉🏻👈🏻
+<br><br>
+nang avag avag tumba anstide, puc was only gud antha, but pl don't make me feel like that piku ma... it was gud cuz you had one male friend dhanush whom just sikdaga just normal friend tara mathadstide, and text alli kuda it was just like normal friend, 
+but now its not at all normal like that, its too close and its not just one person...
+dhanush jote puc alli idhidh tara friend it was best, andree like not being much close, not being too friendly, not being bsfs type hange.., but evaga ashtondh normal agi beda andre, atleast be very little friendly, not much pl, and close anthu bedve beda👉🏻👈🏻pl pll plll…
+Hing 3 years nin hing idhbitre, me will be peaceful without overthinking, jealous and feeling hvy..
+<br><br>
+nan heltirodh ning ishta agtila andre its fyn piku, i'll adjust to the way it is.......
+but just ond arta madko piku ma, that nange jealous agtirodh bagge ning heltane irake ne nang ishta agtila like, i'm saying too much anstide, but hangu heltane idini andre just think, how hvy it is making me feel every single day...
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   YES BUTTON
+========================= */
+
+function yesClicked() {
+
+    // Small message
+    document.getElementById("result").style.display = "block";
+
+    // Hearts / flowers burst
+    for (let i = 0; i < 25; i++) {
+
+        let heart = document.createElement("div");
+
+        heart.className = "confetti";
+
+        heart.innerHTML =
+            Math.random() > .5 ? "💗" : "🌸";
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 25) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 3100);
+    }
+
+    /*
+       Wait a moment, then go to Page 2
+    */
+
+    setTimeout(() => {
+
+        document.getElementById("page1").style.display = "none";
+
+        document.getElementById("page2").style.display = "block";
+
+        window.scrollTo(0, 0);
+
+    }, 1400);
+}
+
+
+/* =========================
+   NO BUTTON
+========================= */
+
+function noClicked() {
+
+    const no = document.getElementById("no");
+
+    no.style.position = "relative";
+
+    const x =
+        (Math.random() - .5) * 180;
+
+    const y =
+        (Math.random() - .5) * 100;
+
+    no.style.transform =
+        `translate(${x}px, ${y}px)`;
+
+    setTimeout(() => {
+
+        no.style.transform = "";
+
+    }, 700);
+}
+
+
+/* =========================
+   FALLING PETALS
+   PAGE 1 ONLY
+========================= */
+
+for (let i = 0; i < 18; i++) {
+
+    let petal = document.createElement("div");
+
+    petal.className = "petal";
+
+    petal.innerHTML =
+        Math.random() > .5 ? "🌸" : "♡";
+
+    petal.style.left =
+        Math.random() * 100 + "%";
+
+    petal.style.animationDuration =
+        (5 + Math.random() * 7) + "s";
+
+    petal.style.animationDelay =
+        Math.random() * 6 + "s";
+
+    document.getElementById("page1")
+        .appendChild(petal);
+}
+
+</script>
+
+</body>
+</html>
